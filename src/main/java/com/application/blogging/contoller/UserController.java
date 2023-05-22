@@ -47,5 +47,5 @@ public class UserController {
 		 userService.DeleteUserById(id);
 		 return "user_deletted successfully";
 	}
-	
+
 }

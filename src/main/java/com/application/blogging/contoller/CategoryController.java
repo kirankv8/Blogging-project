@@ -20,10 +20,10 @@ import com.application.blogging.service.CategoryService;
 @RestController
 @RequestMapping("/api/v1")
 public class CategoryController {
-	
+
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@PostMapping("/category/save")
 	public CategoryResponse createCategory(@RequestBody CategoryDto dto) {
 		return categoryService.createCategory(dto);
@@ -46,6 +46,6 @@ public class CategoryController {
 		categoryService.DeleteCategoryById(id);
 		 return "category_deletted successfully";
 	}
-	
-	
+
+
 }

@@ -22,12 +22,13 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long categoryId;
-	
+
 	@Column(name = "title",nullable = false,length=100)
+
 	private String categoryTitle;
-	
+
 	private String categoryDiscription;
-	
-	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch =FetchType.LAZY)	
+
+	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch =FetchType.LAZY)
 	private List<Post>posts;
 }

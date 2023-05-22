@@ -6,8 +6,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CommentDto {
-	
-	private int id;
+
+	private Long id;
 
 	private String content;
 

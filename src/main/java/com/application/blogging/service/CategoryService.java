@@ -7,7 +7,7 @@ import com.application.blogging.model.dto.CategoryDto;
 import com.application.blogging.model.response.CategoryResponse;
 
 public interface CategoryService {
-	
+
 	CategoryResponse createCategory(CategoryDto dto);
 
 	CategoryResponse updateCategory(CategoryDto dto, Long id) throws ResourceNotFoundException;

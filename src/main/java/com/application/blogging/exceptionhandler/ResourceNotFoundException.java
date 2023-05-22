@@ -2,10 +2,10 @@ package com.application.blogging.exceptionhandler;
 
 public class ResourceNotFoundException extends Exception {
 
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer statuscode;
@@ -22,6 +22,6 @@ public class ResourceNotFoundException extends Exception {
 		super(message);
 		this.statuscode = statuscode;
 	}
-	
-	
+
+
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
 import com.application.blogging.exceptionhandler.ResourceNotFoundException;
 import com.application.blogging.model.Category;
 import com.application.blogging.model.Post;
-import com.application.blogging.model.User;
+import com.application.blogging.model.Users;
 import com.application.blogging.model.dto.PostDto;
 import com.application.blogging.model.response.PageDetails;
 import com.application.blogging.model.response.PostResponse;
@@ -42,7 +41,7 @@ public class PostServiceImpl implements PostSevice {
 
 	@Override
 	public PostResponse createPost(PostDto dto, Long userId, Long categoryId) throws ResourceNotFoundException {
-		User user = userRepository.findById(userId)
+		Users user = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("given UserId not Present In Db", 404));
 		Category category = categoryRepository.findById(categoryId)
 				.orElseThrow(() -> new ResourceNotFoundException("given catgeroyId not Present In Db", 404));
@@ -108,9 +107,14 @@ public class PostServiceImpl implements PostSevice {
 	}
 
 	@Override
-	public List<PostResponse> searchPost(String keyword) {
+	public List<PostResponse> searchPost(String keyword) throws ResourceNotFoundException {
+		List<Post> posts = postRepository.findByTitleContaining(keyword)
+				.orElseThrow(() -> new ResourceNotFoundException("post not found", 404));
 
-		return null;
+		List<PostResponse> responses = posts.stream().map(post -> mapper.map(post, PostResponse.class))
+				.collect(Collectors.toList());
+
+		return responses;
 	}
 
 	@Override
@@ -125,10 +129,10 @@ public class PostServiceImpl implements PostSevice {
 
 	@Override
 	public List<PostResponse> getAllPostByUser(Long userId) throws ResourceNotFoundException {
-		User user = userRepository.findById(userId)
+		Users user = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("given userID not found in Db", 404));
 		List<Post> posts = postRepository.findByUser(user);
-		List<PostResponse> responses = posts.stream().map(post -> mapper.map(post, PostResponse.class)).toList();
+		List<PostResponse> responses = posts.stream().map(post -> mapper.map(post, PostResponse.class)).collect(Collectors.toList());
 		return responses;
 	}
 

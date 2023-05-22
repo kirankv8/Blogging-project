@@ -36,10 +36,10 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-	
+
 	@ManyToOne
-	private User user;
-	
+	private Users user;
+
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "post")
 	private List<Comments> comments;
 }

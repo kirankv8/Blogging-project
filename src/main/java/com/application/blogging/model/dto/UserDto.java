@@ -6,11 +6,13 @@ import lombok.Data;
 public class UserDto {
 
 	private String name;
-	
+
 	private String about;
-	
+
 	private String email;
-	
+
 	private String password;
 	
+	private String roles;
+
 }
